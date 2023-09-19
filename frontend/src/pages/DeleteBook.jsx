@@ -1,8 +1,23 @@
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DeleteBook = () => {
-  return (
-    <div>DeleteBook</div>
-  )
-}
+	const navigate = useNavigate();
+	const { id } = useParams();
+	const handleDeleteBook = () => {
+		axios.delete(`http://localhost:5555/books/${id}`);
 
-export default DeleteBook
+		navigate('/').catch(err => {
+			console.log(err);
+		});
+		navigate('/');
+	};
+
+	return (
+		<div>
+			<button onClick={handleDeleteBook}>Borrar</button>
+		</div>
+	);
+};
+
+export default DeleteBook;
